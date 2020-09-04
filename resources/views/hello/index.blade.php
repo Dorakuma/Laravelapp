@@ -18,19 +18,22 @@
 @section('content')
   <p>{{$msg}}</p>
   @if (count($errors) > 0)
-    <div>
-      <ul>
-        @foreach ($errors->all() as $error)
-          <li>{{ $error }}</li>
-        @endforeach
-      </ul>
-    </div>
+    <p>入力に問題あるよ</p>
   @endif
   <form action="/hello" method="post">
   <table>
     @csrf
+    @if ($errors->has('name'))
+      <tr><th>ERROR</th><td>{{$errors->first('name')}}</td></tr>
+    @endif
     <tr><th>name: </th><td><input type="text" name="name" value="{{old('name')}}"></td></tr>
+    @if ($errors->has('mail'))
+      <tr><th>ERROR</th><td>{{$errors->first('mail')}}</td></tr>
+    @endif
     <tr><th>mail: <td><input type="text" name="mail" value="{{old('mail')}}"></td></th></tr>
+    @if ($errors->has('age'))
+      <tr><th>ERROR</th><td>{{$errors->first('age')}}</td></tr>
+    @endif
     <tr><th>age: <td><input type="text" name="age" value="{{old('age')}}"></td></th></tr>
     <tr><th></th><td><input type="submit" value="send"></td></tr>
   </table>
