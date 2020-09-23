@@ -1,4 +1,4 @@
-@extends('layouts.heloapp')
+@extends('layouts.helloapp')
 
 @section('titile', 'Board.Add')
 
