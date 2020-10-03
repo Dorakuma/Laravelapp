@@ -1,15 +1,14 @@
-<html>
-<head>
-  <title>Hello/Index</title>
-  <style>
-    body { font-size:16pt; color:#999; }
-    h1 { font-size:50pt; text-align:right; color:#f6f6f6;
-      margin:-20px 0px -30px 0px; letter-spacing:-4pt;}
-  </style>
-</head>
 @extends('layouts.helloapp')
-
+<style>
+  .pagination {font-size: 10pt;}
+  .pagination li {display: inline-block;}
+  tr th a:link,
+  tr th a:visited,
+  tr th a:hover,
+  tr th a:active {color: white;}
+</style>
 @section('title', 'Index')
+
 @section('menubar')
   @parent
   インデックスページ
@@ -17,19 +16,18 @@
 
 @section('content')
   <table>
-    <tr><th>Id</th><th>Name</th><th>Mail</th><th>Age</th></tr>
+    <tr>
+      <th><a href="/hello?sort=name">name</a></th>
+      <th><a href="/hello?sort=mail">mail</a></th>
+      <th><a href="/hello?sort=age">age</a></th>
+    </tr>
     @foreach ($items as $item)
       <tr>
-        <td>{{$item->id}}</td>
         <td>{{$item->name}}</td>
         <td>{{$item->mail}}</td>
         <td>{{$item->age}}</td>
       </tr>
     @endforeach
   </table>
+  {{$items->appends(['sort' => $sort])->links()}}
 @endsection
-
-@section('footer')
-copyright 2020 tuyano.
-@endsection
-</html>
